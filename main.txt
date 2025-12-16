@@ -1,0 +1,129 @@
+// === A. Theme Toggle Feature ===
+const themeButton = document.getElementById('themeBtn');
+const bodyElement = document.body;
+const darkModeClass = 'dark-mode';
+
+themeButton.addEventListener('click', () => {
+    bodyElement.classList.toggle(darkModeClass);
+    
+    bodyElement.style.backgroundColor = '';
+
+    if (bodyElement.classList.contains(darkModeClass)) {
+        themeButton.textContent = 'Toggle Light Mode';
+    } else {
+        themeButton.textContent = 'Toggle Dark Mode';
+    }
+});
+
+
+// === B. Edit Job Title Feature ===
+const editJobBtn = document.getElementById('editJobBtn');
+const jobTitleElement = document.getElementById('jobTitle');
+
+editJobBtn.addEventListener('click', () => {
+    const currentTitle = jobTitleElement.textContent;
+    const newTitle = prompt('Enter your new job title:', currentTitle);
+    
+    if (newTitle !== null && newTitle.trim() !== '') {
+        jobTitleElement.textContent = newTitle.trim();
+    } else if (newTitle !== null && newTitle.trim() === '') {
+        alert('Job title cannot be empty.');
+    }
+});
+
+
+// === C. Show/Hide Skills Feature ===
+const toggleSkillsBtn = document.getElementById('toggleSkillsBtn');
+const skillsSection = document.getElementById('skillsSection');
+
+toggleSkillsBtn.addEventListener('click', () => {
+    if (skillsSection.style.display === 'none') {
+        // Show the element
+        skillsSection.style.display = 'block'; 
+        toggleSkillsBtn.textContent = 'Hide Skills';
+    } else {
+        // Hide the element
+        skillsSection.style.display = 'none';
+        toggleSkillsBtn.textContent = 'Show Skills';
+    }
+});
+
+// === D. Live Character Counter Feature ===
+const msgBox = document.getElementById('msgBox');
+const counterSpan = document.getElementById('counter');
+const maxLength = msgBox.getAttribute('maxlength');
+
+msgBox.addEventListener('keyup', () => {
+    const currentLength = msgBox.value.length;
+    const remaining = maxLength - currentLength;
+    
+    counterSpan.textContent = remaining;
+
+    // Visual feedback for remaining characters
+    if(remaining <= 10){
+        counterSpan.style.color = 'red';
+    } else if(remaining <= 50){
+        counterSpan.style.color = 'orange';
+    } else {
+        counterSpan.style.color = '';
+    }
+});
+
+// === E. Form Validation Feature ===
+function validateForm() {
+
+    const nameField = document.getElementById('nameField').value.trim();
+    const emailField = document.getElementById('emailField').value.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(nameField === ""){
+        alert("Name must be filled out.");
+        return false;
+    }
+
+    if(emailField === ""){
+        alert("Email must be filled out.");
+        return false;
+    }
+
+    if(emailField = emailPattern){
+
+        alert("Please enter a valid email address.");
+        return false;
+
+    }
+
+    return true;
+
+}
+
+// === F. Display Current Date Feature ===
+const dateDisplay = document.getElementById('dateDisplay');
+const today = new Date();
+const formattedDate = today.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+});
+
+if(dateDisplay){
+    dateDisplay.textContent = formattedDate;
+}
+
+
+// === G. Theme Color Picker Feature ===
+const colorPicker = document.getElementById('colorPicker');
+
+if(colorPicker){
+    colorPicker.addEventListener('input', (event) =>{
+        const newColor = event.target.value;
+
+        bodyElement.style.backgroundColor = newColor;
+        
+        if(bodyElement.classList.contains(darkModelClass)){
+            bodyElement.classList.remove(darkModeClass);
+            themeButton.textContent = 'Toggle Dark Mode';
+        }
+
+    })
+}
